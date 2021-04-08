@@ -19,12 +19,17 @@ export default {
     }
   },
 
+  async asyncData({$axios}) {
+    const users = await $axios.$get('/users')
+    return {users}
+  },
+
+  /*
   async mounted() {
     //console.log(this.$axios)
-    const res = await this.$axios.get('https://jsonplaceholder.typicode.com/users')
-    console.log(res.data)
-    this.users = res.data;
+    this.users = await this.$axios.$get('https://jsonplaceholder.typicode.com/users')
   }
+  */
 }
 </script>
 
