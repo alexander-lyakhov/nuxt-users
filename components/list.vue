@@ -43,17 +43,16 @@ export default {
 .list {
   display: flex;
   flex-wrap: wrap;
-  margin: 0 -0.25rem 1.5rem;
+  margin: 0 -.5rem 1.5rem;
 
   .item {
     font: 1rem verdana;
-    //background: #303030;
+    //background: #099;
     border-bottom: 1px solid #606060;
     line-height: 1.4;
     display: block;
-    //width: 25%;
-    margin: .25rem 0;
-    padding: .5rem 0;
+    //margin: .25rem 0;
+    padding: .5rem .5rem;
 
     &:last-child {
       border: none;

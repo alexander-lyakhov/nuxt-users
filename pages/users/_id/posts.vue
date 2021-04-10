@@ -1,13 +1,26 @@
 ﻿<template>
   <div class="">
-    <h2>Posts</h2>
+    <list :items="posts">
+      <template #title>
+        Posts
+      </template>
+      <template #default="{ item }">
+        {{ item.title }}
+      </template>
+    </list>
   </div>
 </template>
 
 <script>
+import list from '@/components/list'
 export default {
-  mounted() {
-    console.log(this.$route)
-  }
+  components: {
+    list
+  },
+
+  async asyncData(ctx) {
+    const posts = await ctx.$axios.$get(`users/${ctx.params.id}/posts`)
+    return { posts }
+  },
 }
 </script>

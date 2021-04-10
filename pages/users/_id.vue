@@ -21,10 +21,7 @@ export default {
 
   async asyncData(ctx) {
     const user = await ctx.$axios.$get('users/' + ctx.params.id)
-
-    console.log(ctx.route)
-
-    return {user}
+    return { user }
   }
 }
 </script>
@@ -32,6 +29,12 @@ export default {
 <style lang="scss" scoped>
 .user__info {
   border-bottom: 2px solid #606060;
+  margin-bottom: 1.5rem;
+
+  h2 {
+    font-size: 2.5rem;
+    color: #a0a0a0;
+  }
 
   .nav {
     display: flex;
