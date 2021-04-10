@@ -69,3 +69,9 @@ h2 {
 .invisible {
   display: none!important;
 }
+
+.container {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 16px 16px 32px;
+}

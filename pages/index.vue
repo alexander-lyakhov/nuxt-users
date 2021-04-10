@@ -1,22 +1,22 @@
 <template>
   <div class="container">
-    <h2>
-      <span>User list</span>
-    </h2>
-  <ul class="list">
-    <li class="item" v-for="(item, index) in users" :key="index">
-      <a href="#">{{ item.name }}</a>
-    </li>
-  </ul>
+    <list :items="users">
+      <template #title>
+        User list
+      </template>
+      <template #default="{ item }">
+        <a href="#" @click.prevent="onUserClick(item.id)">{{ item.name }}</a>
+      </template>
+    </list>
   </div>
 </template>
 
 <script>
+import list from '@/components/list'
+
 export default {
-  data() {
-    return {
-      users: []
-    }
+  components: {
+    list
   },
 
   async asyncData({$axios}) {
@@ -24,33 +24,14 @@ export default {
     return {users}
   },
 
-  /*
-  async mounted() {
-    //console.log(this.$axios)
-    this.users = await this.$axios.$get('https://jsonplaceholder.typicode.com/users')
-  }
-  */
-}
-</script>
-
-<style lang="scss">
-.container {
-  max-width: 960px;
-  margin: 0 auto;
-  padding: 16px 16px 32px;
-
-  .list {
-    .item {
-      font: 1rem verdana;
-      border-bottom: 1px solid #606060;
-      //min-height: 32px;
-      line-height: 1.4;
-      display: block;
-      padding: .5rem 0;
-      &:last-child {
-        border: none;
-      }
+  methods: {
+    onUserClick(id) {
+      console.log('onUserClick', id)
+      this.$router.push('users/' + id)
     }
   }
 }
+</script>
+
+<style lang="scss" scoped>
 </style>
