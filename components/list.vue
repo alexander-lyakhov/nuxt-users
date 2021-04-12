@@ -4,7 +4,7 @@
       <slot name="title">List Header</slot>
     </h2>
     <ul class="list">
-      <li class="item" :style="itemWidth" v-for="(item, index) in items" :key="index">
+      <li class="item" :style="styles" v-for="(item, index) in items" :key="index">
         <slot :item="item"></slot>
       </li>
     </ul>
@@ -24,16 +24,14 @@ export default {
       type: Number,
       default: 1,
       validator: (value) => [1,2,4,5,8,10].includes(value)
-    }
-  },
-
-  created() {
-    console.log('created', this.items)
+    },
   },
 
   computed: {
-    itemWidth() {
-      return {width: `${100 / this.columns}%`};
+    styles() {
+      return {
+        'width': `${100 / this.columns}%`
+      };
     }
   }
 }
@@ -43,16 +41,18 @@ export default {
 .list {
   display: flex;
   flex-wrap: wrap;
-  margin: 0 -.5rem 1.5rem;
+  //width: 100%;
+  margin: 0 -.25rem 1.5rem;
 
   .item {
     font: 1rem verdana;
     //background: #099;
     border-bottom: 1px solid #606060;
     line-height: 1.4;
-    display: block;
+    display: flex;
+    width: 100%;
     //margin: .25rem 0;
-    padding: .5rem .5rem;
+    padding: .5rem .25rem;
 
     &:last-child {
       border: none;

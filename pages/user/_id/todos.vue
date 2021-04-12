@@ -1,11 +1,11 @@
 ﻿<template>
   <div class="">
-    <list :items="albums" :columns="2">
+    <list :items="todos">
       <template #title>
-        Albums
+        ToDos
       </template>
       <template #default="{ item }">
-        <div class="item-album">{{ item.title }}</div>
+        {{ item.title }}
       </template>
     </list>
   </div>
@@ -19,14 +19,8 @@ export default {
   },
 
   async asyncData(ctx) {
-    const albums = await ctx.$axios.$get(`users/${ctx.params.id}/albums`)
-    return { albums }
+    const todos = await ctx.$axios.$get(`users/${ctx.params.id}/todos`)
+    return { todos }
   },
 }
 </script>
-
-<style lang="scss" scoped>
-.item-album::v-deep {
-  //background: #033;
-}
-</style>

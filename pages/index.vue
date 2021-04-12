@@ -26,7 +26,7 @@ export default {
 
   methods: {
     onUserClick(id) {
-      this.$router.push('users/' + id)
+      this.$router.push('user/' + id)
     }
   }
 }
