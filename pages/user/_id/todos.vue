@@ -1,5 +1,5 @@
 ﻿<template>
-  <div class="">
+  <div v-show="isVisible">
     <list :items="todos">
       <template #title>
         ToDos
@@ -13,7 +13,10 @@
 
 <script>
 import list from '@/components/list'
+import userRoutesMixin from './userRoutesMixin.js'
 export default {
+  mixins: [userRoutesMixin],
+
   components: {
     list
   },

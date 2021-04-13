@@ -13,26 +13,18 @@
 
 <script>
 import list from '@/components/list'
+import userRoutesMixin from './userRoutesMixin.js'
 export default {
+  mixins: [userRoutesMixin],
+
   components: {
     list
-  },
-
-  data() {
-    return {
-      isVisible: true
-    }
   },
 
   async asyncData(ctx) {
     const albums = await ctx.$axios.$get(`users/${ctx.params.id}/albums`)
     return { albums }
   },
-
-  beforeRouteLeave(to, from, next) {
-    this.isVisible = false;
-    next();
-  }
 }
 </script>
 
