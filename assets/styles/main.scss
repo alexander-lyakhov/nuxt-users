@@ -3,11 +3,11 @@
 @import './variables.scss';
 
 html, body {
+  font: 16px verdana;
   min-height: 100vh;
 }
 
 body {
-  font: 16px verdana;
   color: $color-primary;
   background: #404040;
   min-height: 100%;
