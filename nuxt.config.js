@@ -39,11 +39,16 @@ export default {
   modules: [
     // https://go.nuxtjs.dev/axios
     '@nuxtjs/axios',
+    '@nuxtjs/style-resources',
   ],
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {
     baseURL: 'https://jsonplaceholder.typicode.com'
+  },
+
+  styleResources: {
+    scss: ['@/assets/styles/variables.scss']
   },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build

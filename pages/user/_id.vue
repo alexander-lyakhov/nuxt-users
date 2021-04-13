@@ -7,6 +7,9 @@
         <nuxt-link exact no-prefetch class="nuxt-link" :to="{name: 'user-id-albums', params: $route.params}">Albums</nuxt-link>
         <nuxt-link exact no-prefetch class="nuxt-link" :to="{name: 'user-id-todos', params: $route.params}">ToDos</nuxt-link>
         <nuxt-link exact no-prefetch class="nuxt-link" :to="{name: 'user-id-posts', params: $route.params}">Posts</nuxt-link>
+        <nuxt-link exact class="nav-home" :to="{path: '/'}">
+          Back to user list
+        </nuxt-link>
       </nav>
     </div>
     <pre v-if="$route.name === 'user-id'" class="user__profile">{{ JSON.stringify(user, null, 4) }}</pre>
@@ -49,6 +52,37 @@ export default {
         &-active {
           border-bottom: 2px solid #9cf;
         }
+      }
+
+      &-home {
+        color: $color-accent-blue;
+        display: flex;
+        margin-left: auto;
+        padding: 0.75rem 0;
+        position: relative;
+
+        &::after {
+          content: '';
+          //border-top: 2px solid $color-accent-orange;
+          //border-right: 2px solid $color-accent-orange;
+          border-top: 2px solid #c0c0c0;
+          border-right: 2px solid #c0c0c0;
+          display: block;
+          width: 8px;
+          height: 8px;
+          position: absolute;
+          left: -28px;
+          top: 16px;
+          opacity: 0;
+          transform: rotate(45deg);
+          transition: left .2s, opacity .2s;
+        }
+
+        &:hover:after {
+          left: -20px;
+          opacity: 1;
+        }
+
       }
     }
   }

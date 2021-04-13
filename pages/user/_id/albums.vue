@@ -1,11 +1,21 @@
 ﻿<template>
   <div v-show="isVisible" class="list">
-    <list :items="albums" :columns="2" :separator="false">
+    <list :items="albums" :columns="4" :separator="false">
       <template #title>
         Albums
       </template>
       <template #default="{ item }">
+        <!--
         <div class="item-album">{{ item.title }}</div>
+        -->
+        <div class="item-album">
+          <div class="item-album__img">
+            <img src="/images/Album-04.jpg" />
+          </div>
+          <div class="item-album__title">
+            {{ item.title }}
+          </div>
+        </div>
       </template>
     </list>
   </div>
@@ -34,17 +44,37 @@ export default {
     border: none;
 
     &-album {
-      font-size: 1.25rem;
-      background: #303030;
-      border: 4px solid #808080;
+      background: #000;
+      border: .25rem solid #fff;
       box-shadow: 0 4px 8px rgba(0,0,0,0.25);
       text-transform: capitalize;
-      width: 100%;
       margin: -.25rem 0;
-      padding: 1rem;
       cursor: pointer;
-    }
 
+      &__img {
+        background: #fff;
+        border-bottom: 1px solid #c0c0c0;
+        display: flex;
+        position: relative;
+
+        &::after {
+          content: '';
+          @extend .overlay;
+        }
+
+        img {
+          object-fit: cover;
+          width: 100%;
+        }
+      }
+
+      &__title {
+        background: #000;
+        display: flex;
+        text-align: center;
+        padding: .5rem;
+      }
+    }
   }
 }
 </style>
