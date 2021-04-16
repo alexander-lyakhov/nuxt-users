@@ -2,7 +2,7 @@
   <div class="container">
     <div class="user__info">
       <h2>{{ user.name }}</h2>
-      <nav class="nav">
+      <nav class="nav" @mouseover="onNavHover">
         <nuxt-link exact no-prefetch class="nuxt-link" :to="{name: 'user-id', params: $route.params}">Profile</nuxt-link>
         <nuxt-link exact no-prefetch class="nuxt-link" :to="{name: 'user-id-albums', params: $route.params}">Albums</nuxt-link>
         <nuxt-link exact no-prefetch class="nuxt-link" :to="{name: 'user-id-todos', params: $route.params}">ToDos</nuxt-link>
@@ -26,6 +26,14 @@ export default {
   async asyncData(ctx) {
     const user = await ctx.$axios.$get('users/' + ctx.params.id)
     return { user }
+  },
+
+  methods: {
+    onNavHover(e) {
+      if (e.target.className.match(/^nuxt-link$/)) {
+        console.log(e.target.offsetLeft)
+      }
+    }
   }
 }
 </script>
@@ -43,14 +51,34 @@ export default {
 
     .nav {
       display: flex;
+      position: relative;
+
+      &::after {
+        content: '';
+        background: rgba(255,255,255,.4);
+        border-bottom: 2px solid #fff;
+        display: block;
+        width: 64px;
+        height: 100%;
+        position: absolute;
+        left: 0;
+        top: 0;
+        //opacity: .4;
+        //z-index: 1;
+      }
+
       .nuxt-link {
         position: relative;
-        top: 1px;
+        top: 2px;
         margin-right: .75rem;
         padding: .75rem 0;
 
         &-active {
           border-bottom: 2px solid #9cf;
+        }
+
+        &:hover {
+          border-bottom: 2px solid #a0a0a0;
         }
       }
 
