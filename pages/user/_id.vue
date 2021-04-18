@@ -10,6 +10,7 @@
         <nuxt-link exact class="nav-home" :to="{path: '/'}">
           Back to user list
         </nuxt-link>
+        <div ref="nav-slider" class="nav-slider" />
       </nav>
     </div>
     <pre v-if="$route.name === 'user-id'" class="user__profile">{{ JSON.stringify(user, null, 4) }}</pre>
@@ -30,10 +31,11 @@ export default {
 
   methods: {
     onNavHover(e) {
-      if (e.target.className.match(/^nuxt-link$/)) {
-        console.log(e.target.offsetLeft)
+      if (/^nuxt-link/.test(e.target.className)) {
+        this.$refs['nav-slider'].style.left = e.target.offsetLeft + 'px'
+        this.$refs['nav-slider'].style.width = e.target.offsetWidth + 'px'
       }
-    }
+    },
   }
 }
 </script>
@@ -53,18 +55,15 @@ export default {
       display: flex;
       position: relative;
 
-      &::after {
-        content: '';
+      &-slider {
         background: rgba(255,255,255,.4);
         border-bottom: 2px solid #fff;
         display: block;
-        width: 64px;
-        height: 100%;
+        width: 0;
         position: absolute;
         left: 0;
-        top: 0;
-        //opacity: .4;
-        //z-index: 1;
+        bottom: -2px;
+        transition: left .2s, width .2s;
       }
 
       .nuxt-link {
@@ -72,14 +71,17 @@ export default {
         top: 2px;
         margin-right: .75rem;
         padding: .75rem 0;
+        z-index: 1;
 
         &-active {
           border-bottom: 2px solid #9cf;
         }
 
+        /*
         &:hover {
           border-bottom: 2px solid #a0a0a0;
         }
+        */
       }
 
       &-home {
@@ -91,8 +93,6 @@ export default {
 
         &::after {
           content: '';
-          //border-top: 2px solid $color-accent-orange;
-          //border-right: 2px solid $color-accent-orange;
           border-top: 2px solid #c0c0c0;
           border-right: 2px solid #c0c0c0;
           display: block;
