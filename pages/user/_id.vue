@@ -2,7 +2,7 @@
   <div class="container">
     <div class="user__info">
       <h2>{{ user.name }}</h2>
-      <nav class="nav" @mouseover="onNavHover">
+      <nav class="nav" @mouseover="onNavHover" @mouseleave="onNavMouseOut">
         <nuxt-link exact no-prefetch class="nuxt-link" :to="{name: 'user-id', params: $route.params}">Profile</nuxt-link>
         <nuxt-link exact no-prefetch class="nuxt-link" :to="{name: 'user-id-albums', params: $route.params}">Albums</nuxt-link>
         <nuxt-link exact no-prefetch class="nuxt-link" :to="{name: 'user-id-todos', params: $route.params}">ToDos</nuxt-link>
@@ -32,10 +32,16 @@ export default {
   methods: {
     onNavHover(e) {
       if (/^nuxt-link/.test(e.target.className)) {
+        this.$refs['nav-slider'].style.opacity = 1
         this.$refs['nav-slider'].style.left = e.target.offsetLeft + 'px'
         this.$refs['nav-slider'].style.width = e.target.offsetWidth + 'px'
       }
     },
+
+    onNavMouseOut(e) {
+      console.log('onNavMouseOut', e)
+      this.$refs['nav-slider'].style.opacity = 0
+    }
   }
 }
 </script>
@@ -57,13 +63,13 @@ export default {
 
       &-slider {
         background: rgba(255,255,255,.4);
-        border-bottom: 2px solid #fff;
+        border-bottom: 2px solid #e0e0e0;
         display: block;
         width: 0;
         position: absolute;
         left: 0;
         bottom: -2px;
-        transition: left .2s, width .2s;
+        transition: left .2s, width .2s, opacity .2s;
       }
 
       .nuxt-link {
