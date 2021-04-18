@@ -2,11 +2,13 @@
   <div class="container">
     <div class="user__info">
       <h2>{{ user.name }}</h2>
-      <nav class="nav" @mouseover="onNavHover" @mouseleave="onNavMouseOut">
-        <nuxt-link exact no-prefetch class="nuxt-link" :to="{name: 'user-id', params: $route.params}">Profile</nuxt-link>
-        <nuxt-link exact no-prefetch class="nuxt-link" :to="{name: 'user-id-albums', params: $route.params}">Albums</nuxt-link>
-        <nuxt-link exact no-prefetch class="nuxt-link" :to="{name: 'user-id-todos', params: $route.params}">ToDos</nuxt-link>
-        <nuxt-link exact no-prefetch class="nuxt-link" :to="{name: 'user-id-posts', params: $route.params}">Posts</nuxt-link>
+      <nav class="nav">
+        <div @mouseover="onNavHover" @mouseleave="onNavMouseOut">
+          <nuxt-link exact no-prefetch class="nuxt-link" :to="{name: 'user-id', params: $route.params}">Profile</nuxt-link>
+          <nuxt-link exact no-prefetch class="nuxt-link" :to="{name: 'user-id-albums', params: $route.params}">Albums</nuxt-link>
+          <nuxt-link exact no-prefetch class="nuxt-link" :to="{name: 'user-id-todos', params: $route.params}">ToDos</nuxt-link>
+          <nuxt-link exact no-prefetch class="nuxt-link" :to="{name: 'user-id-posts', params: $route.params}">Posts</nuxt-link>
+        </div>
         <nuxt-link exact class="nav-home" :to="{path: '/'}">
           Back to user list
         </nuxt-link>
@@ -39,7 +41,6 @@ export default {
     },
 
     onNavMouseOut(e) {
-      console.log('onNavMouseOut', e)
       this.$refs['nav-slider'].style.opacity = 0
     }
   }
@@ -60,6 +61,10 @@ export default {
     .nav {
       display: flex;
       position: relative;
+
+      & > div {
+        display: flex;
+      }
 
       &-slider {
         background: rgba(255,255,255,.4);
